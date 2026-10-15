@@ -17,6 +17,9 @@ Palette = {
     0x7FFF,
     0x7FE0
 }
+local TEMPO = 1800
+
+
 
 local TELA_LARGURA = 480
 local TELA_ALTURA = 270
@@ -54,95 +57,100 @@ function loop(frame)
         local color = Palette[i]
         ui.palset(i - 1, color)
     end
+    if frame < TEMPO then 
 
-    if frame % 30 == 0 and sistema_atualizado == false then
-        local indice_letra = math.random(1, #alfabeto)
+        if frame % 30 == 0 and sistema_atualizado == false then
+            local indice_letra = math.random(1, #alfabeto)
 
-        local nova_letra = {
-            char = alfabeto[indice_letra],
-            x = math.random(0, TELA_LARGURA - 10),
-            y= -20,
-            velocidade_queda = math.random(1,3)
+            local nova_letra = {
+                char = alfabeto[indice_letra],
+                x = math.random(0, TELA_LARGURA - 10),
+                y= -20,
+                velocidade_queda = math.random(1,3)
 
-        }
-        table.insert(letras_tela,nova_letra)
-    end
-
-    if sistema_atualizado == false then
-
-        if ui.btn(LEFT) then
-            jogador.x = jogador.x - jogador.v
+            }
+            table.insert(letras_tela,nova_letra)
         end
 
-        if ui.btn(RIGHT) then
-            jogador.x = jogador.x + jogador.v
+        if sistema_atualizado == false then
+
+            if ui.btn(LEFT) then
+                jogador.x = jogador.x - jogador.v
+            end
+
+            if ui.btn(RIGHT) then
+                jogador.x = jogador.x + jogador.v
+            end
+            if ui.btn(UP) then
+                jogador.y = jogador.y - jogador.v
+            end
+
+            if ui.btn(DOWN) then
+                jogador.y = jogador.y + jogador.v
+            end
+
+            jogador.x = math.max(0, math.min(jogador.x, TELA_LARGURA-jogador.w))
+            jogador.y = math.max(0, math.min(jogador.y, TELA_ALTURA-jogador.h))
         end
-        if ui.btn(UP) then
-            jogador.y = jogador.y - jogador.v
+        for i = #letras_tela, 1, -1 do
+            local letra = letras_tela[i]
+            letra.y = letra.y +letra.velocidade_queda
+            local pegou_letra = colisao(jogador.x, jogador.y, jogador.w, jogador.h,
+                                        letra.x, letra.y, 8,8)
+
+            if pegou_letra then
+                for indice, item_senha in ipairs(senha) do
+                    if item_senha.char == letra.char and item_senha.catch == false then
+                        item_senha.catch = true
+                        break
+                    end
+                end
+
+                
+                table.remove(letras_tela, i)
+            end 
+
+            if letra.y > TELA_ALTURA then
+                table.remove(letras_tela,i)
+            end
         end
 
-        if ui.btn(DOWN) then
-            jogador.y = jogador.y + jogador.v
+
+        ui.cls(0)
+        -- jogador
+        ui.rectfill(jogador.x, jogador.y, jogador.x+jogador.w, jogador.y+jogador.h,2)
+        for indice, letra in ipairs(letras_tela) do
+            ui.print(letra.char, letra.x, letra.y,4)
+        end
+        -- 4 branco
+        -- 3 vermelhor
+        ui.print(">", 15, 10, 2 )
+        for indice, letra in ipairs(senha) do
+            local cor = letra.catch and 2 or 4
+            ui.print(letra.char, letra.x, 10, cor )
         end
 
-        jogador.x = math.max(0, math.min(jogador.x, TELA_LARGURA-jogador.w))
-        jogador.y = math.max(0, math.min(jogador.y, TELA_ALTURA-jogador.h))
-    end
-    for i = #letras_tela, 1, -1 do
-        local letra = letras_tela[i]
-        letra.y = letra.y +letra.velocidade_queda
-        local pegou_letra = colisao(jogador.x, jogador.y, jogador.w, jogador.h,
-                                    letra.x, letra.y, 8,8)
-
-        if pegou_letra then
+        if sistema_atualizado == false then
+            local faltam_letras = false
             for indice, item_senha in ipairs(senha) do
-                if item_senha.char == letra.char and item_senha.catch == false then
-                    item_senha.catch = true
+                if item_senha.catch == false then
+                    faltam_letras = true
                     break
                 end
             end
 
-            
-            table.remove(letras_tela, i)
-        end 
-
-        if letra.y > TELA_ALTURA then
-            table.remove(letras_tela,i)
-        end
-    end
-
-
-    ui.cls(0)
-    -- jogador
-    ui.rectfill(jogador.x, jogador.y, jogador.x+jogador.w, jogador.y+jogador.h,2)
-    for indice, letra in ipairs(letras_tela) do
-        ui.print(letra.char, letra.x, letra.y,4)
-    end
-    -- 4 branco
-    -- 3 vermelhor
-    ui.print(">", 15, 10, 2 )
-    for indice, letra in ipairs(senha) do
-        local cor = letra.catch and 2 or 4
-        ui.print(letra.char, letra.x, 10, cor )
-    end
-
-    if sistema_atualizado == false then
-        local faltam_letras = false
-        for indice, item_senha in ipairs(senha) do
-            if item_senha.catch == false then
-                faltam_letras = true
-                break
+            if faltam_letras == false then
+                sistema_atualizado = true
             end
         end
 
-        if faltam_letras == false then
-            sistema_atualizado = true
+        if sistema_atualizado == true then
+            ui.cls(0)
+            ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 4)
         end
-    end
-
-    if sistema_atualizado == true then
-        ui.cls()
-        ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 4)
+    else
+        ui.cls(0)
+        ui.print("500 SISTEMA FALHOU", 140, 135, 4)
     end
 
 end 
