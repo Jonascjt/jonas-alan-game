@@ -69,7 +69,7 @@ function loop(frame)
                                     letra.x, letra.y, 8,8)
 
         if pegou_letra then
-            table.insert(letras_catch,i)
+            table.insert(letras_catch,letras_tela[i])
             table.remove(letras_tela, i)
         end 
 
