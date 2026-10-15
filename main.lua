@@ -5,15 +5,15 @@ local jogador = {
     x=100,
     y=100,
     w=50,
-    h=10,
-    v=2
+    h=5,
+    v=3
 }
 
-palette = {
-    0x000,
+Palette = {
+    0x000, -- preto
     0x7C00,
-    0x03E0,
-    0x001F,
+    0x03E0, -- verde
+    0x001F, -- branco
     0x7FFF,
     0x7FE0
 }
@@ -117,7 +117,7 @@ function loop(frame)
     for indice, letra in ipairs(letras_tela) do
         ui.print(letra.char, letra.x, letra.y,4)
     end
-    ui.print(">", 10, 10, 0x03E0 )
+    ui.print(">", 10, 10, 3 )
     for indice, letra in ipairs(senha) do
         local cor = letra.catch and 3 or 6
         ui.print(letra.char, letra.x, 10, cor )
