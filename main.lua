@@ -72,7 +72,7 @@ function loop(frame)
     end
     if frame < TEMPO and estado_game == "game" then 
         if frame % 30 then
-            TEMPO_CORRIDO = TEMPO_CORRIDO + 1
+            TEMPO_CORRIDO = frame/60
         end
         if frame % 30 == 0 and sistema_atualizado == false then
             local indice_letra = math.random(1, #alfabeto)
