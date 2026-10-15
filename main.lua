@@ -24,9 +24,12 @@ local senha = {
     {char="O", x = 130, y= 10, catch = false},
     {char="R", x = 150, y= 10, catch = false},
     {char="L", x = 170, y= 10, catch = false},
-    {char="D", x = 190, y= 10, catch = false}}
-local letras_catch = {}
+    {char="D", x = 190, y= 10, catch = false}
+}
+
 local largura_incial = 10
+
+local sistema_atualizado = false
 
 function colisao (x1, y1, w1, h1, x2, y2, w2, h2)
     return x1 < x2 + w2 and
