@@ -68,7 +68,8 @@ function loop(frame)
 
         if pegou_letra then
             table.remove(letras_tela, i)
-
+        end 
+        
         if letra.y > TELA_ALTURA then
             table.remove(letras_tela,i)
         end
