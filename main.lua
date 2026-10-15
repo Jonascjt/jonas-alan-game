@@ -106,7 +106,26 @@ function loop(frame)
         ui.print(letra.char, letra.x, letra.y,4)
     end
     for indice, letra in ipairs(senha) do
-        local cor = letra.catch and 5 or 6
+        local cor = letra.catch and 3 or 4
         ui.print(letra.char, letra.x, 10, cor )
     end
+
+    if sistema_atualizado == false then
+        local faltam_letras = false
+        for indice, item_senha in ipairs(senha) do
+            if item_senha.catch == false then
+                faltam_letras = true
+                break
+            end
+        end
+
+        if faltam_letras == false then
+            sistema_atualizado = true
+        end
+    end
+
+    if sistema_atualizado == true then
+        ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 4)
+    end
+
 end 
