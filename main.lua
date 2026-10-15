@@ -71,7 +71,7 @@ function loop(frame)
             estado_game = "game"
         end
     end
-    if frame < TEMPO and estado_game == "game" then 
+    if frame < TEMPO_CORRIDO and estado_game == "game" then 
         if frame % 30 then
             FRAMES_JOGADOS = FRAMES_JOGADOS + 1
             TEMPO_CORRIDO = FRAMES_JOGADOS/60
@@ -167,18 +167,22 @@ function loop(frame)
             ui.print("PARA JOGAR NOVAMENTE [UP]", 140, 155, 2)
             if ui.btn(UP) then
                 FRAMES_JOGADOS = 0
+                TEMPO_CORRIDO = 0
                 sistema_atualizado = false
+                estado_game = "incio"
             end
 
         end
     end
-    if frame > TEMPO and estado_game == "game" then
+    if frame > TEMPO_CORRIDO and estado_game == "game" and sistema_atualizado == false then
         ui.cls(0)
         ui.print("500 SISTEMA FALHOU", 170, 125, 4)
           ui.print("PARA JOGAR NOVAMENTE [UP]", 140, 145, 2)
             if ui.btn(UP) then
                 FRAMES_JOGADOS = 0
+                TEMPO_CORRIDO = 0
                 sistema_atualizado = false
+                estado_game = "incio"
             end
     end
 
