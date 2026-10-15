@@ -46,7 +46,7 @@ function loop(frame)
         ui.palset(i - 1, color)
     end
 
-    if frame % 30 == 0 then
+    if frame % 30 == 0 and sistema_atualizado == false then
         local indice_letra = math.random(1, #alfabeto)
 
         local nova_letra = {
@@ -106,7 +106,7 @@ function loop(frame)
         ui.print(letra.char, letra.x, letra.y,4)
     end
     for indice, letra in ipairs(senha) do
-        local cor = letra.catch and 3 or 4
+        local cor = letra.catch and 3 or 6
         ui.print(letra.char, letra.x, 10, cor )
     end
 
