@@ -20,6 +20,7 @@ Palette = {
 local TEMPO = 2400
 
 local TEMPO_CORRIDO = 0
+local FRAMES_JOGADOS = 0 
 
 local estado_game = "inicio"
 
@@ -72,7 +73,8 @@ function loop(frame)
     end
     if frame < TEMPO and estado_game == "game" then 
         if frame % 30 then
-            TEMPO_CORRIDO = frame/60
+            FRAMES_JOGADOS = FRAMES_JOGADOS + 1
+            TEMPO_CORRIDO = FRAMES_JOGADOS/60
         end
         if frame % 30 == 0 and sistema_atualizado == false then
             local indice_letra = math.random(1, #alfabeto)
@@ -162,6 +164,12 @@ function loop(frame)
         if sistema_atualizado == true then
             ui.cls(0)
             ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 2)
+            ui.print("PARA JOGAR NOVAMENTE [UP]", 140, 155, 2)
+            if ui.btn(UP) then
+                FRAMES_JOGADOS = 0
+                sistema_atualizado = false
+            end
+
         end
     end
     if frame > TEMPO and estado_game == "game" then
