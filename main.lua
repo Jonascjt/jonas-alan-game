@@ -16,6 +16,7 @@ local letras_tela = {}
 local alfabeto = { "A", "B", "C", "H", "E", "L", "O", "W", "D", "R"}
 local senha = "HELLO WORLD"
 local letras_catch = {}
+local largura_incial = 10
 
 function colisao (x1, y1, w1, h1, x2, y2, w2, h2)
     return x1 < x2 + w2 and
@@ -85,6 +86,6 @@ function loop(frame)
         ui.print(letra.char, letra.x, letra.y,4)
     end
     for indice, letra in ipairs(letras_catch) do
-        ui.print(letra.char, 10, 10,5)
+        ui.print(letra.char, largura_incial+(indice*2), 10,5)
     end
 end 
