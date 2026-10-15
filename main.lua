@@ -136,8 +136,9 @@ function loop(frame)
             ui.print(letra.char, letra.x, letra.y,4)
         end
         -- 4 branco
-        -- 3 vermelhor
+        -- 3 vermelho
         ui.print(">", 15, 10, 2 )
+        ui.print(TEMPO_CORRIDO, 460, 10, 2 )
         for indice, letra in ipairs(senha) do
             local cor = letra.catch and 2 or 4
             ui.print(letra.char, letra.x, 10, cor )
