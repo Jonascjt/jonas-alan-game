@@ -61,6 +61,7 @@ function loop(frame)
     end
 
     if estado_game == "inicio" then
+        ui.cls(0)
         ui.print("O SISTEMA FALOU", 140, 135, 4)
         ui.print("VOCE PRECISA RESETAR DIGITANDO A SENHA", 140, 155, 4)
         ui.print("PEGUE AS LETRAS PARA CORRIGIR A FALHA", 140, 175, 4)
@@ -161,7 +162,7 @@ function loop(frame)
             ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 4)
         end
     end
-    if estado_game == "game" then
+    if frame > TEMPO and estado_game == "game" then
         ui.cls(0)
         ui.print("500 SISTEMA FALHOU", 170, 135, 4)
     end
