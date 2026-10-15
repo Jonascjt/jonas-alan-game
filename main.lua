@@ -164,7 +164,7 @@ function loop(frame)
             ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 2)
         end
     end
-    if frame > TEMPO and estado_game == "game" then
+    if frame > TEMPO and estado_game == "game" and sistema_atualizado == false then
         ui.cls(0)
         ui.print("500 SISTEMA FALHOU", 170, 135, 4)
     end
