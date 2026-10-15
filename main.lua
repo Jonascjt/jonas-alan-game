@@ -138,7 +138,8 @@ function loop(frame)
         -- 4 branco
         -- 3 vermelho
         ui.print(">", 15, 10, 2 )
-        ui.print(TEMPO_CORRIDO .. "/40s", 430, 10, 2 )
+        local tempo_restante = math.floor(TEMPO_CORRIDO)
+        ui.print("TEMPO" .. tempo_restante .. "/40s", 430, 10, 2 )
         for indice, letra in ipairs(senha) do
             local cor = letra.catch and 2 or 4
             ui.print(letra.char, letra.x, 10, cor )
@@ -160,7 +161,7 @@ function loop(frame)
 
         if sistema_atualizado == true then
             ui.cls(0)
-            ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 4)
+            ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 2)
         end
     end
     if frame > TEMPO and estado_game == "game" then
