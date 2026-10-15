@@ -117,7 +117,9 @@ function loop(frame)
     for indice, letra in ipairs(letras_tela) do
         ui.print(letra.char, letra.x, letra.y,4)
     end
-    ui.print(">", 10, 10, 4 )
+    -- 4 branco
+    -- 3 vermelhor
+    ui.print(">", 10, 10, 2 )
     for indice, letra in ipairs(senha) do
         local cor = letra.catch and 4 or 3
         ui.print(letra.char, letra.x, 10, cor )
