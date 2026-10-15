@@ -5,7 +5,7 @@ local jogador = {
     x=100,
     y=100,
     w=50,
-    h=50,
+    h=10,
     v=2
 }
 
@@ -14,7 +14,17 @@ local TELA_ALTURA = 270
 
 local letras_tela = {}
 local alfabeto = { "A", "B", "C", "H", "E", "L", "O", "W", "D", "R"}
-local senha = "HELLO WORLD"
+local senha = {
+    {char="H", x = 10, y= 10, catch = false},
+    {char="E", x = 30, y= 10, catch = false},
+    {char="L", x = 50, y= 10, catch = false},
+    {char="L", x = 70, y= 10, catch = false},
+    {char="O", x = 90, y= 10, catch = false},
+    {char="W", x = 110, y= 10, catch = false},
+    {char="O", x = 130, y= 10, catch = false},
+    {char="R", x = 150, y= 10, catch = false},
+    {char="L", x = 170, y= 10, catch = false},
+    {char="D", x = 190, y= 10, catch = false}}
 local letras_catch = {}
 local largura_incial = 10
 
@@ -70,7 +80,14 @@ function loop(frame)
                                     letra.x, letra.y, 8,8)
 
         if pegou_letra then
-            table.insert(letras_catch,letras_tela[i])
+            for indice, item_senha in ipairs(senha) do
+                if item_senha.char == letra.char and item_senha.catch == false then
+                    item_senha.catch = true
+                    break
+                end
+            end
+
+            
             table.remove(letras_tela, i)
         end 
 
@@ -85,7 +102,7 @@ function loop(frame)
     for indice, letra in ipairs(letras_tela) do
         ui.print(letra.char, letra.x, letra.y,4)
     end
-    for indice, letra in ipairs(letras_catch) do
-        ui.print(letra.char, largura_incial+(indice*2), 10,5)
+    for indice, letra in ipairs(senha) do
+        ui.print(letra.char, letra.x, 10, if senha.catch == true then 5 else 6 )
     end
 end 
