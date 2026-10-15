@@ -17,7 +17,9 @@ Palette = {
     0x7FFF,
     0x7FE0
 }
-local TEMPO = 1800
+local TEMPO = 2400
+
+local TEMPO_CORRIDO = 0
 
 local estado_game = "inicio"
 
@@ -57,7 +59,17 @@ function loop(frame)
         local color = Palette[i]
         ui.palset(i - 1, color)
     end
-    if frame < TEMPO then 
+
+    if estado_game == "inicio"
+        ui.print("O SISTEMA FALOU", 140, 135, 4)
+        ui.print("VOCE PRECISA RESETAR DIGITANDO A SENHA", 140, 155, 4)
+        ui.print("PEGUE AS LETRAS PARA CORRIGIR A FALHA", 140, 175, 4)
+        ui.print("APERTE [UP] APRA COMEÇAR", 140, 195, 4)
+        if ui.btn(UP) then
+                estado_game = "game"
+        end
+    end
+    if frame < TEMPO and estado_game == "game" then 
 
         if frame % 30 == 0 and sistema_atualizado == false then
             local indice_letra = math.random(1, #alfabeto)
@@ -148,7 +160,7 @@ function loop(frame)
             ui.cls(0)
             ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 4)
         end
-    else
+    else if estado_game == "game"
         ui.cls(0)
         ui.print("500 SISTEMA FALHOU", 170, 135, 4)
     end
