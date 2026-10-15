@@ -64,6 +64,6 @@ function loop(frame)
     ui.cls(0)
     ui.rectfill(jogador.x, jogador.y, jogador.x+jogador.w, jogador.y+jogador.h,2)
     for indice, letra in ipairs(letras_tela) do
-        ui.print(letra.chart, letra.x, letra.y,4)
+        ui.print(letra.char, letra.x, letra.y,4)
     end
 end 
