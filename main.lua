@@ -106,6 +106,7 @@ function loop(frame)
         ui.print(letra.char, letra.x, letra.y,4)
     end
     for indice, letra in ipairs(senha) do
-        ui.print(letra.char, letra.x, 10, if senha.catch == true then 5 else 6 )
+        local cor =if senha.catch and 5 or 6
+        ui.print(letra.char, letra.x, 10, cor )
     end
 end 
