@@ -9,6 +9,15 @@ local jogador = {
     v=2
 }
 
+palette = {
+    0x000,
+    0x7C00,
+    0x03E0,
+    0x001F,
+    0x7FFF,
+    0x7FE0
+}
+
 local TELA_LARGURA = 480
 local TELA_ALTURA = 270
 
