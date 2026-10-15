@@ -4,8 +4,8 @@ require "sprites"
 local jogador = {
     x=100,
     y=100,
-    w=16.
-    h=16
+    w=16,
+    h=16,
     v=2
 }
 
