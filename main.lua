@@ -15,16 +15,16 @@ local TELA_ALTURA = 270
 local letras_tela = {}
 local alfabeto = { "A", "B", "C", "H", "E", "L", "O", "W", "D", "R"}
 local senha = {
-    {char="H", x = 10, y= 10, catch = false},
-    {char="E", x = 30, y= 10, catch = false},
-    {char="L", x = 50, y= 10, catch = false},
+    {char="H", x = 30, y= 10, catch = false},
+    {char="E", x = 50, y= 10, catch = false},
     {char="L", x = 70, y= 10, catch = false},
-    {char="O", x = 90, y= 10, catch = false},
-    {char="W", x = 110, y= 10, catch = false},
-    {char="O", x = 130, y= 10, catch = false},
-    {char="R", x = 150, y= 10, catch = false},
-    {char="L", x = 170, y= 10, catch = false},
-    {char="D", x = 190, y= 10, catch = false}
+    {char="L", x = 90, y= 10, catch = false},
+    {char="O", x = 110, y= 10, catch = false},
+    {char="W", x = 130, y= 10, catch = false},
+    {char="O", x = 150, y= 10, catch = false},
+    {char="R", x = 170, y= 10, catch = false},
+    {char="L", x = 190, y= 10, catch = false},
+    {char="D", x = 210, y= 10, catch = false}
 }
 
 local largura_incial = 10
@@ -59,23 +59,26 @@ function loop(frame)
         table.insert(letras_tela,nova_letra)
     end
 
-    if ui.btn(LEFT) then
-        jogador.x = jogador.x - jogador.v
-    end
+    if sistema_atualizado == false then
 
-    if ui.btn(RIGHT) then
-        jogador.x = jogador.x + jogador.v
-    end
-    if ui.btn(UP) then
-        jogador.y = jogador.y - jogador.v
-    end
+        if ui.btn(LEFT) then
+            jogador.x = jogador.x - jogador.v
+        end
 
-    if ui.btn(DOWN) then
-        jogador.y = jogador.y + jogador.v
-    end
-    jogador.x = math.max(0, math.min(jogador.x, TELA_LARGURA-jogador.w))
-    jogador.y = math.max(0, math.min(jogador.y, TELA_ALTURA-jogador.h))
+        if ui.btn(RIGHT) then
+            jogador.x = jogador.x + jogador.v
+        end
+        if ui.btn(UP) then
+            jogador.y = jogador.y - jogador.v
+        end
 
+        if ui.btn(DOWN) then
+            jogador.y = jogador.y + jogador.v
+        end
+
+        jogador.x = math.max(0, math.min(jogador.x, TELA_LARGURA-jogador.w))
+        jogador.y = math.max(0, math.min(jogador.y, TELA_ALTURA-jogador.h))
+    end
     for i = #letras_tela, 1, -1 do
         local letra = letras_tela[i]
         letra.y = letra.y +letra.velocidade_queda
@@ -101,10 +104,11 @@ function loop(frame)
 
 
     ui.cls(0)
-    ui.rectfill(jogador.x, jogador.y, jogador.x+jogador.w, jogador.y+jogador.h,2)
+    ui.rectfill(jogador.x, jogador.y, jogador.x+jogador.w, jogador.y+jogador.h,7)
     for indice, letra in ipairs(letras_tela) do
         ui.print(letra.char, letra.x, letra.y,4)
     end
+    ui.print(">", 10, 10, 0x03E0 )
     for indice, letra in ipairs(senha) do
         local cor = letra.catch and 3 or 6
         ui.print(letra.char, letra.x, 10, cor )
