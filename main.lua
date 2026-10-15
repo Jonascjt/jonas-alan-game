@@ -20,7 +20,6 @@ Palette = {
 local TEMPO = 2400
 
 local TEMPO_CORRIDO = 0
-local FRAMES_JOGADOS = 0 
 
 local estado_game = "inicio"
 
@@ -71,10 +70,9 @@ function loop(frame)
             estado_game = "game"
         end
     end
-    if frame < TEMPO_CORRIDO and estado_game == "game" then 
+    if frame < TEMPO and estado_game == "game" then 
         if frame % 30 then
-            FRAMES_JOGADOS = FRAMES_JOGADOS + 1
-            TEMPO_CORRIDO = FRAMES_JOGADOS/60
+            TEMPO_CORRIDO = frame/60
         end
         if frame % 30 == 0 and sistema_atualizado == false then
             local indice_letra = math.random(1, #alfabeto)
@@ -164,26 +162,11 @@ function loop(frame)
         if sistema_atualizado == true then
             ui.cls(0)
             ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 2)
-            ui.print("PARA JOGAR NOVAMENTE [UP]", 140, 155, 2)
-            if ui.btn(UP) then
-                FRAMES_JOGADOS = 0
-                TEMPO_CORRIDO = 0
-                sistema_atualizado = false
-                estado_game = "incio"
-            end
-
         end
     end
-    if FRAMES_JOGADOS > TEMPO_CORRIDO and estado_game == "game" and sistema_atualizado == false then
+    if frame > TEMPO and estado_game == "game" then
         ui.cls(0)
-        ui.print("500 SISTEMA FALHOU", 170, 125, 4)
-          ui.print("PARA JOGAR NOVAMENTE [UP]", 140, 145, 2)
-            if ui.btn(UP) then
-                FRAMES_JOGADOS = 0
-                TEMPO_CORRIDO = 0
-                sistema_atualizado = false
-                estado_game = "incio"
-            end
+        ui.print("500 SISTEMA FALHOU", 170, 135, 4)
     end
 
 end 
