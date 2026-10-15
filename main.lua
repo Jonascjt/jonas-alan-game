@@ -13,7 +13,9 @@ local TELA_LARGURA = 480
 local TELA_ALTURA = 270
 
 local letras_tela = {}
-local alfabeto = { "A", "B", "C"}
+local alfabeto = { "A", "B", "C", "H", "E", "L", "O", "W", "D", "R"}
+local senha = "HELLO WORLD"
+local letras_catch = {}
 
 function colisao (x1, y1, w1, h1, x2, y2, w2, h2)
     return x1 < x2 + w2 and
@@ -67,9 +69,10 @@ function loop(frame)
                                     letra.x, letra.y, 8,8)
 
         if pegou_letra then
+            table.insert(letras_catch,i)
             table.remove(letras_tela, i)
         end 
-        
+
         if letra.y > TELA_ALTURA then
             table.remove(letras_tela,i)
         end
@@ -80,5 +83,8 @@ function loop(frame)
     ui.rectfill(jogador.x, jogador.y, jogador.x+jogador.w, jogador.y+jogador.h,2)
     for indice, letra in ipairs(letras_tela) do
         ui.print(letra.char, letra.x, letra.y,4)
+    end
+    for indice, letra in ipairs(letras_catch) do
+        ui.print(letra.char, 10, 10,5)
     end
 end 
