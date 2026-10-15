@@ -113,15 +113,16 @@ function loop(frame)
 
 
     ui.cls(0)
-    ui.rectfill(jogador.x, jogador.y, jogador.x+jogador.w, jogador.y+jogador.h,7)
+    -- jogador
+    ui.rectfill(jogador.x, jogador.y, jogador.x+jogador.w, jogador.y+jogador.h,2)
     for indice, letra in ipairs(letras_tela) do
         ui.print(letra.char, letra.x, letra.y,4)
     end
     -- 4 branco
     -- 3 vermelhor
-    ui.print(">", 10, 10, 2 )
+    ui.print(">", 15, 10, 2 )
     for indice, letra in ipairs(senha) do
-        local cor = letra.catch and 4 or 3
+        local cor = letra.catch and 2 or 4
         ui.print(letra.char, letra.x, 10, cor )
     end
 
@@ -140,6 +141,7 @@ function loop(frame)
     end
 
     if sistema_atualizado == true then
+        ui.cls()
         ui.print("SISTEMA ATUALIZADO COM SUCESSO", 140, 135, 4)
     end
 
