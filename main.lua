@@ -4,8 +4,8 @@ require "sprites"
 local jogador = {
     x=100,
     y=100,
-    w=16,
-    h=16,
+    w=50,
+    h=50,
     v=2
 }
 
@@ -30,8 +30,6 @@ function loop(frame)
         jogador.y = jogador.y + jogador.v
     end
 
-    ui.clip(0,0,480,270)
-    ui.camera(0,0)
-    ui.cls(Palette.hex(0x45283c))
+    ui.cls(0)
     ui.rectfill(jogador.x, jogador.y, jogador.x+jogador.w, jogador.y+jogador.h,2)
 end 
