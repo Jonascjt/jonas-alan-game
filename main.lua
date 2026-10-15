@@ -19,7 +19,7 @@ Palette = {
 }
 local TEMPO = 1800
 
-
+local estado_game = "inicio"
 
 local TELA_LARGURA = 480
 local TELA_ALTURA = 270
@@ -150,7 +150,7 @@ function loop(frame)
         end
     else
         ui.cls(0)
-        ui.print("500 SISTEMA FALHOU", 140, 135, 4)
+        ui.print("500 SISTEMA FALHOU", 170, 135, 4)
     end
 
 end 
