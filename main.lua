@@ -26,7 +26,7 @@ function loop(frame)
         jogador.y = jogador.y - jogador.v
     end
 
-    if ui.btn(DOWM) then
+    if ui.btn(DOWN) then
         jogador.y = jogador.y + jogador.v
     end
 
