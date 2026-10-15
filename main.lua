@@ -174,7 +174,7 @@ function loop(frame)
 
         end
     end
-    if frame > TEMPO_CORRIDO and estado_game == "game" and sistema_atualizado == false then
+    if FRAMES_JOGADOS > TEMPO_CORRIDO and estado_game == "game" and sistema_atualizado == false then
         ui.cls(0)
         ui.print("500 SISTEMA FALHOU", 170, 125, 4)
           ui.print("PARA JOGAR NOVAMENTE [UP]", 140, 145, 2)
