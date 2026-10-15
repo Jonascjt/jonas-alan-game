@@ -60,19 +60,19 @@ function loop(frame)
         ui.palset(i - 1, color)
     end
 
-   -- if estado_game == "inicio" then
-     --   ui.print("O SISTEMA FALOU", 140, 135, 4)
-       -- ui.print("VOCE PRECISA RESETAR DIGITANDO A SENHA", 140, 155, 4)
-        --ui.print("PEGUE AS LETRAS PARA CORRIGIR A FALHA", 140, 175, 4)
-        --ui.print("APERTE [UP] APRA COMEÇAR", 140, 195, 4)
-        --if ui.btn(UP) then
-         --   estado_game = "game"
-        --end
-   -- end
+    if estado_game == "inicio" then
+        ui.print("O SISTEMA FALOU", 140, 135, 4)
+        ui.print("VOCE PRECISA RESETAR DIGITANDO A SENHA", 140, 155, 4)
+        ui.print("PEGUE AS LETRAS PARA CORRIGIR A FALHA", 140, 175, 4)
+        ui.print("APERTE [UP] APRA COMEÇAR", 140, 195, 4)
+        if ui.btn(UP) then
+            estado_game = "game"
+        end
+    end
     if frame < TEMPO and estado_game == "game" then 
-        --if frame % 30 then
-            --TEMPO_CORRIDO = TEMPO_CORRIDO + 1
-        --end
+        if frame % 30 then
+            TEMPO_CORRIDO = TEMPO_CORRIDO + 1
+        end
         if frame % 30 == 0 and sistema_atualizado == false then
             local indice_letra = math.random(1, #alfabeto)
 
