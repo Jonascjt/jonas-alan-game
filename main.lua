@@ -15,6 +15,14 @@ local TELA_ALTURA = 270
 local letras_tela = {}
 local alfabeto = { "A", "B", "C"}
 
+function colisao (x1, y1, w1, h1, x2, y2, w2, h2)
+    return x1, < x2 + w2 and
+        x1 + w1 > x2 and
+        y1 < y2 + h2 and
+        y1 + h1 > y2
+end
+
+
 function loop(frame)
     
     for i = 1, #Palette do
@@ -55,6 +63,12 @@ function loop(frame)
     for i = #letras_tela, 1, -1 do
         local letra = letras_tela[i]
         letra.y = letra.y +letra.velocidade_queda
+        local pegou_letra = colisao(jogador.x, jogador.y, jogador.w, jogador.h,
+                                    letra.x, letra.y, 8,8)
+
+        if pegou_letra then
+            table.remove(letras_tela, i)
+                                        
         if letra.y > TELA_ALTURA then
             table.remove(letras_tela,i)
         end
